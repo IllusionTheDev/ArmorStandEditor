@@ -184,13 +184,14 @@
             <version>0.100.2.9</version>
             <scope>provided</scope>
         </dependency>
-        <!--- UpdateChecker -->
+        <!--- UpdateChecker
         <dependency>
             <groupId>com.jeff_media</groupId>
             <artifactId>SpigotUpdateChecker</artifactId>
             <version>3.0.3</version>
             <scope>compile</scope>
         </dependency>
+        -->
         <!-- SuperiorSkyblock API -->
         <dependency>
             <groupId>com.bgsoftware</groupId>

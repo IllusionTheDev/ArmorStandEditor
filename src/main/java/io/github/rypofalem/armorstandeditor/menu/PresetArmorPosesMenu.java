@@ -48,7 +48,7 @@ public class PresetArmorPosesMenu {
         this.pe = pe;
         this.armorstand = as;
         name = plugin.getLang().getMessage("presettitle", "menutitle");
-        menuInv = Bukkit.createInventory(pe.getManager().getPresetHolder(), 36, name);
+        menuInv = Bukkit.createInventory(null, 36, name);
     }
 
     //PRESET NAMES
@@ -128,7 +128,7 @@ public class PresetArmorPosesMenu {
     public void openMenu() {
         if (pe.getPlayer().hasPermission("asedit.basic")) {
             fillInventory();
-            pe.getPlayer().openInventory(menuInv);
+            ASEMenuTracker.open(pe.getPlayer(), menuInv, ASEMenuType.PRESET);
         }
     }
 

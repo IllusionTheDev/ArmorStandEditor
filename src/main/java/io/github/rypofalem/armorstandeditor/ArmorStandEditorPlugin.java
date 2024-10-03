@@ -19,15 +19,13 @@
 
 package io.github.rypofalem.armorstandeditor;
 
-import com.jeff_media.updatechecker.UpdateCheckSource;
-import com.jeff_media.updatechecker.UpdateChecker;
-import com.jeff_media.updatechecker.UserAgentBuilder;
-
 import io.github.rypofalem.armorstandeditor.Metrics.*;
 import io.github.rypofalem.armorstandeditor.language.Language;
 
+import io.github.rypofalem.armorstandeditor.menu.ASEMenuTracker;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -326,6 +324,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     }
 
     private void runUpdateCheckerConsoleUpdateCheck() {
+        /*
         if (getArmorStandEditorVersion().contains(".x")) {
             getLogger().warning("Note from the development team: ");
             getLogger().warning("It appears that you are using the development version of ArmorStandEditor");
@@ -342,10 +341,12 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
                 .checkEveryXHours(updateCheckerInterval)
                 .checkNow();
         }
+
+         */
     }
 
     private void runUpdateCheckerWithOPNotifyOnJoinEnabled() {
-        if (getArmorStandEditorVersion().contains(".x")) {
+        /*if (getArmorStandEditorVersion().contains(".x")) {
             getLogger().warning("Note from the development team: ");
             getLogger().warning("It appears that you are using the development version of ArmorStandEditor");
             getLogger().warning("This version can be unstable and is not recommended for Production Environments.");
@@ -362,6 +363,8 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
                 .checkEveryXHours(updateCheckerInterval)
                 .checkNow();
         }
+
+         */
     }
 
     //Implement Glow Effects for Wolfstorm/ArmorStandEditor-Issues#5 - Add Disable Slots with Different Glow than Default
@@ -397,7 +400,11 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            if (player.getOpenInventory().getTopInventory().getHolder() == editorManager.getMenuHolder()) player.closeInventory();
+            InventoryView view = player.getOpenInventory();
+            if (ASEMenuTracker.getMenuType(view) != null) {
+                player.closeInventory();
+                ASEMenuTracker.close(view);
+            }
         }
 
         if (!hasFolia) {

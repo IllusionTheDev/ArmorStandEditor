@@ -44,7 +44,7 @@ public class EquipmentMenu {
         this.pe = pe;
         this.armorstand = as;
         name = pe.plugin.getLang().getMessage("equiptitle", "menutitle");
-        menuInv = Bukkit.createInventory(pe.getManager().getEquipmentHolder(), 18, name);
+        menuInv = Bukkit.createInventory(null, 18, name);
     }
 
     private void fillInventory() {
@@ -93,7 +93,7 @@ public class EquipmentMenu {
 
     public void open() {
         fillInventory();
-        pe.getPlayer().openInventory(menuInv);
+        ASEMenuTracker.open(pe.getPlayer(), menuInv, ASEMenuType.EQUIPMENT);
     }
 
     public void equipArmorstand() {

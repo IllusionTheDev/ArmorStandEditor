@@ -43,7 +43,7 @@ public class Menu {
     public Menu(PlayerEditor pe) {
         this.pe = pe;
         name = pe.plugin.getLang().getMessage("mainmenutitle", "menutitle");
-        menuInv = Bukkit.createInventory(pe.getManager().getMenuHolder(), 54, name);
+        menuInv = Bukkit.createInventory(null, 54, name);
         fillInventory();
     }
 
@@ -300,7 +300,7 @@ public class Menu {
     public void openMenu() {
         if (pe.getPlayer().hasPermission("asedit.basic")) {
             fillInventory();
-            pe.getPlayer().openInventory(menuInv);
+            ASEMenuTracker.open(pe.getPlayer(), menuInv, ASEMenuType.MENU);
         }
     }
 
